@@ -1,0 +1,112 @@
+A) HALF ADDER Code:-
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- Create Date: 20.09.2023 17:00:16
+-- Design Name: 
+-- Module Name: HA - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- Dependencies: 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+entity HA is
+    Port ( a : in STD_LOGIC;
+           b : in STD_LOGIC;
+           sum : out STD_LOGIC;
+           carry : out STD_LOGIC);
+end HA;
+
+architecture Behavioral of HA is
+
+begin
+sun<= a xor b;
+carry<= a and b;
+
+end Behavioral;
+
+
+
+
+
+
+HALF ADDER Test Bench:-
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 20.09.2023 17:05:37
+-- Design Name: 
+-- Module Name: HA_tb - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity HA_tb is
+--  Port ( );
+end HA_tb;
+
+architecture Behavioral of HA_tb is
+component HA is
+    Port ( a : in STD_LOGIC;
+           b : in STD_LOGIC;
+           sum : out STD_LOGIC;
+           carry : out STD_LOGIC);
+end component;
+signal a,b,sum,carry:STD_LOGIC;
+begin
+U1: HA port map(a,b,sum,carry);
+process
+begin
+a<='0';
+b<='0';
+wait for 100ns;
+a<='0';
+b<='1';
+wait for 100ns;
+a<='1';
+b<='0';
+wait for 100ns;
+a<='1';
+b<='1';
+wait for 100ns;
+end process;
+
+end Behavioral;
+

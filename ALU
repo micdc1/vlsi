@@ -1,0 +1,113 @@
+ALU Code:-
+
+----------------------------------------------------------------------------------
+-- Create Date: 28.08.2023 15:33:22
+-- Design Name: 
+-- Module Name: ALU - Behavioral
+-- Project Name: 
+-------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+entity ALU is
+    Port ( a : in STD_LOGIC_VECTOR (3 downto 0);
+           b : in STD_LOGIC_VECTOR (3 downto 0);
+           sel : in STD_LOGIC_VECTOR (3 downto 0);
+           y : out STD_LOGIC_VECTOR(3 downto 0));
+end ALU;
+architecture dataflow of ALU is
+begin
+y<=a when sel = "0000" else
+a+1 when sel = "0001" else
+a-1 when sel = "0010" else
+b when sel = "0011" else
+b+1 when sel = "0100" else
+b-1 when sel = "0101" else
+a+b when sel = "0110" else
+a-b when sel = "0111" else
+NOT a when sel = "1000" else
+NOT b when sel = "1001" else
+a AND b when sel = "1010" else
+a OR b when sel = "1011" else
+a NAND b when sel = "1100" else
+a NOR b when sel = "1101" else
+a XOR b when sel = "1110" else
+a XNOR b when sel = "1111" ;
+end dataflow;
+
+
+
+
+
+
+ALU Test Bench:-
+
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 28.08.2023 16:07:53
+-- Design Name: 
+-- Module Name: ALU_tb - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity ALU_tb is
+--  Port ( );
+end ALU_tb;
+
+architecture beh of ALU_tb is
+
+COMPONENT ALU is
+Port ( a : in STD_LOGIC_VECTOR (3 downto 0);
+           b : in STD_LOGIC_VECTOR (3 downto 0);
+           sel : in STD_LOGIC_VECTOR (3 downto 0);
+           y : out STD_LOGIC_VECTOR(3 downto 0));
+end COMPONENT;          
+
+signal a,b,y: std_logic_vector(3 downto 0);
+signal sel:std_logic_vector(3 downto 0):="0000";
+begin
+
+U1: ALU port map(a,b,sel,y);
+process
+begin
+a<="1100";
+b<="1010";
+--sel<="0000";
+--wait for 100 ns;
+sel<=sel+1;
+wait for 100 ns;
+end process;
+end beh;
+
