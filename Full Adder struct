@@ -1,0 +1,61 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 14.08.2023 02:50:27
+-- Design Name: 
+-- Module Name: fa_struct - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity fa_struct is
+    Port ( a : in STD_LOGIC;
+           b : in STD_LOGIC;
+           cin : in STD_LOGIC;
+           sum : out STD_LOGIC;
+           carry : out STD_LOGIC);
+end fa_struct;
+
+architecture Behavioral of fa_struct is
+component halfadder is
+  Port ( a : in STD_LOGIC;
+           b : in STD_LOGIC;
+           sum : out STD_LOGIC;
+           carry : out STD_LOGIC);
+end component;
+component orgate is
+    Port ( a : in STD_LOGIC;
+           b : in STD_LOGIC;
+           --c1 : out STD_LOGIC;
+           c3: out STD_LOGIC);
+end component;
+signal temp1,temp2,temp3 : std_logic;
+begin
+u1 : halfadder port map(a,b,temp1,temp2);
+u2: halfadder port map(temp2,cin,sum,temp3);
+u3: orgate port map(temp2,temp3,carry);
+
+end Behavioral;
